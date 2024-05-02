@@ -4,6 +4,12 @@ import pandas as pd
 import sqlite3
 import matplotlib.pyplot as plt
 from scipy import stats
+from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeRegressor
+from sklearn.metrics import mean_squared_error
+from sklearn.linear_model import LinearRegression
+from sklearn.ensemble import VotingRegressor
+from sklearn.ensemble import BaggingRegressor
 
 netflix_movies = pd.read_csv(r'C://Users//USER//Downloads//Documents//Best Movies Netflix.csv')
 
@@ -28,11 +34,11 @@ selected_data = random_sample[selected_columns]
 # Now i can perform operations on this DataFrame
 mean_values = selected_data.mean()
 
-x = statistics.mean(mean_values)
+a = statistics.mean(mean_values)
 
 
 # Printing the mean
-print("Mean is :", x)
+print("Mean is :", a)
 # let's Generate new random numbers
 netflix_movies['random'] = pd.Series(np.random.rand(len(netflix_movies)))
 
@@ -50,10 +56,10 @@ next_selected_data = next_random_sample[selected_columns]
 next_mean_values = next_selected_data.mean()
 
 
-y = statistics.mean(next_mean_values)
+b = statistics.mean(next_mean_values)
 
 # Printing the mean
-print("next Mean is :", y)
+print("next Mean is :", b)
 
 # Plotting two features
 plt.bar(random_sample['MAIN_GENRE'],random_sample['NUMBER_OF_VOTES'])
@@ -157,3 +163,30 @@ for row in rows:
 
 # Closing the connection
 conn.close()
+#let's try to predict a upcoming netflix movie voting's voting based on its genre , production country and historical voting and scoring data 
+X = pd.random_sample['MAIN_GENRE','MAIN_PRODUCTION']
+
+y = pd.random_sample['NUMBER_OF_VOTES','SCORE','DURATION']
+X_pred = pd.random_sample({
+    'MAIN_GENRE': [thriller], 
+    'MAIN_PRODUCTION': [us], 
+})
+# Split data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Create a decision tree regressor
+tree_regressor = DecisionTreeRegressor(max_depth=5)  # Adjust max_depth as needed
+
+
+
+# Fit the model to the training data
+tree_regressor.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = tree_regressor.predict(X_test)
+
+# Evaluate the model
+mse = mean_squared_error(y_test, y_pred)
+print(f"Mean Squared Error: {mse:.2f}")
+
+print(y_pred)
