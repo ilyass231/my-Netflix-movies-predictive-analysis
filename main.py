@@ -7,9 +7,6 @@ from scipy import stats
 from sklearn.model_selection import train_test_split
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.metrics import mean_squared_error
-from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import VotingRegressor
-from sklearn.ensemble import BaggingRegressor
 
 netflix_movies = pd.read_csv(r'C://Users//USER//Downloads//Documents//Best Movies Netflix.csv')
 
