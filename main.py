@@ -160,7 +160,7 @@ for row in rows:
 
 # Closing the connection
 conn.close()
-#let's try to predict a upcoming netflix movie voting's voting based on its genre , production country and historical voting and scoring data 
+#let's try to predict a upcoming netflix movie trigger warning voting's voting based on its genre , production country and historical voting and scoring data 
 X = pd.random_sample['MAIN_GENRE','MAIN_PRODUCTION']
 
 y = pd.random_sample['NUMBER_OF_VOTES','SCORE','DURATION']
